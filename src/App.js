@@ -1,27 +1,32 @@
 import "./App.css";
-import Person from "./components/Person";
-import Trasto from "./components/Trasto";
 import Counter from "./components/Counter";
+import People from "./components/People";
+import Header from "./layout/Header";
+import Employee from "./components/Employee";
+import Hero from "./components/Hero";
+import React, { useState } from "react";
 
-function App() {
+const App = () => {
+
+  const [page, setPage] = useState(1);
+
+  let renderingPage = ""
+  if(page === 2)
+    renderingPage = <Employee/>
+  else if (page === 3)
+    renderingPage = <People/>
+  else if (page === 4)
+    renderingPage = <Counter/>
+  else
+    renderingPage = <Hero/>
+
   return (
     <>
-      <div>
-        <Person name="Juanito" eyeColor="blue" age="23"></Person>
-        <Person name="Pepito" eyeColor="blue"></Person>
-        <Person eyeColor="green" age="23"></Person>
-        <Person />
-      </div>
-
-      <div>
-        <Trasto />
-      </div>
-
-      <div>
-        <Counter />
-      </div>
+      <Header changePage={setPage}/>
+      {renderingPage}
     </>
-  );
+  )
+
 }
 
 export default App;
